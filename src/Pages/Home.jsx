@@ -1,0 +1,275 @@
+import ScrollToTop from "../Components/ScrollToTop"
+import Navigation from "../Components/Navigation"
+import Hero from "../assets/hero.jpg"
+import { useState, useEffect, useRef } from "react"
+
+const Home = () => {
+    const [scale, setScale] = useState(1);
+    const [isHeadingVisible, setIsHeadingVisible] = useState(false);
+    const [isImageVisible, setIsImageVisible] = useState(false);
+    const [isSectionTwoVisible, setIsSectionTwoVisible] = useState(false);
+    const [isButtonVisible, setIsButtonVisible] = useState(false);
+    const [isFeatureOneVisible, setIsFeatureOneVisible] = useState(false);
+    const [isFeatureTwoVisible, setIsFeatureTwoVisible] = useState(false);
+    const [isFeatureThreeVisible, setIsFeatureThreeVisible] = useState(false);
+
+    const headingRef = useRef(null);
+    const imageRef = useRef(null);
+    const sectionTwoRef = useRef(null);
+    const buttonRef = useRef(null);
+    const featureOneRef = useRef(null);
+    const featureTwoRef = useRef(null);
+    const featureThreeRef = useRef(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrolled = window.scrollY;
+            const rate = scrolled * 0.0005;
+            setScale(Math.min(1 + rate, 2));
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: "0px"
+        };
+
+        const headingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsHeadingVisible(true);
+                }
+            });
+        }, observerOptions);
+
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsImageVisible(true);
+                }
+            });
+        }, observerOptions);
+
+        const sectionTwoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsSectionTwoVisible(true);
+                }
+            });
+        }, observerOptions);
+
+        const buttonObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsButtonVisible(true);
+                }
+            });
+        }, observerOptions);
+
+        const featureOneObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsFeatureOneVisible(true);
+                }
+            });
+        }, observerOptions);
+
+        const featureTwoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsFeatureTwoVisible(true);
+                }
+            });
+        }, observerOptions);
+
+        const featureThreeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsFeatureThreeVisible(true);
+                }
+            });
+        }, observerOptions);
+
+        if (headingRef.current) {
+            headingObserver.observe(headingRef.current);
+        }
+
+        if (imageRef.current) {
+            imageObserver.observe(imageRef.current);
+        }
+
+        if (sectionTwoRef.current) {
+            sectionTwoObserver.observe(sectionTwoRef.current);
+        }
+
+        if (buttonRef.current) {
+            buttonObserver.observe(buttonRef.current);
+        }
+
+        if (featureOneRef.current) {
+            featureOneObserver.observe(featureOneRef.current);
+        }
+
+        if (featureTwoRef.current) {
+            featureTwoObserver.observe(featureTwoRef.current);
+        }
+
+        if (featureThreeRef.current) {
+            featureThreeObserver.observe(featureThreeRef.current);
+        }
+
+        return () => {
+            if (headingRef.current) {
+                headingObserver.unobserve(headingRef.current);
+            }
+            if (imageRef.current) {
+                imageObserver.unobserve(imageRef.current);
+            }
+            if (sectionTwoRef.current) {
+                sectionTwoObserver.unobserve(sectionTwoRef.current);
+            }
+            if (buttonRef.current) {
+                buttonObserver.unobserve(buttonRef.current);
+            }
+            if (featureOneRef.current) {
+                featureOneObserver.unobserve(featureOneRef.current);
+            }
+            if (featureTwoRef.current) {
+                featureTwoObserver.unobserve(featureTwoRef.current);
+            }
+            if (featureThreeRef.current) {
+                featureThreeObserver.unobserve(featureThreeRef.current);
+            }
+        };
+    }, []);
+
+    return (
+        <div>
+            <Navigation />
+            <div>
+                <div>
+                    <section>
+                        <div className="max-w-screen-xl mx-auto py-20 px-4">
+                            <div
+                                ref={headingRef}
+                                className={`uppercase text-4xl font-semibold transition-all duration-1000 ease-out ${isHeadingVisible
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-12'
+                                    }`}
+                            >
+                                <h1 className="text-white">Animated. Modern. Black.</h1>
+                                <h2 className="text-[#777777]">Software Developer Portfolio.</h2>
+                            </div>
+                            <div
+                                ref={buttonRef}
+                                className={`flex items-center mt-4 transition-all duration-1000 ease-out ${isButtonVisible
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-12'
+                                    }`}
+                            >
+                                <button className="text-black bg-white px-8 py-2 rounded text-sm w-full md:w-fit font-medium hover:bg-white/90 duration-300">
+                                    Explore
+                                </button>
+                            </div>
+
+                            <div
+                                ref={imageRef}
+                                className={`mt-16 py-4 md:py-6 relative overflow-hidden rounded-md transition-all duration-1000 ease-out ${isImageVisible
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-16'
+                                    }`}
+                            >
+                                <div className="w-full overflow-hidden">
+                                    <img
+                                        src={Hero}
+                                        alt="Working Desk"
+                                        className="w-full h-auto filter grayscale block"
+                                        style={{ transform: `scale(${scale})` }}
+                                    />
+                                </div>
+                                <div className="absolute inset-0 bg-black opacity-50"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div
+                            ref={sectionTwoRef}
+                            className={`py-10 text-center text-3xl max-w-4xl mx-auto font-semibold transition-all duration-1000 ease-out ${isSectionTwoVisible
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-12'
+                                }`}
+                        >
+                            <h1 className="text-white">Hi, I’m Oluwatofunmi, or Tofunmithehuman.</h1>
+                            <h2 className="text-[#777777]">I build sleek, efficient, and scalable solutions with code. Passionate about beautiful UI, powerful backends, and seamless digital experience.</h2>
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <div className="py-20 px-4 max-w-screen-xl mx-auto flex flex-col gap-16">
+                            <div 
+                                ref={featureOneRef}
+                                className={`flex flex-col-reverse md:flex-row items-center gap-4 transition-all duration-1000 ease-out ${isFeatureOneVisible
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-12'
+                                }`}
+                            >
+                                <div className="md:w-1/2 text-3xl">
+                                    <div className="max-w-md mx-auto">
+                                        <h1 className="text-white font-semibold">Modern web apps.</h1>
+                                        <p className="text-[#777777]">From concept to launch, I craft blazing fast, responsive experiences using the latest web technologies.</p>
+                                    </div>
+                                </div>
+                                <div className="md:w-1/2">
+                                    <img src={Hero} alt="" />
+                                </div>
+                            </div>
+                            <div 
+                                ref={featureTwoRef}
+                                className={`flex flex-col-reverse md:flex-row-reverse items-center gap-4 transition-all duration-1000 ease-out ${isFeatureTwoVisible
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-12'
+                                }`}
+                            >
+                                <div className="md:w-1/2 text-3xl">
+                                    <div className="max-w-md mx-auto">
+                                        <h1 className="text-white font-semibold">Smooth animations.</h1>
+                                        <p className="text-[#777777]">Every project feels alive with subtle, elegant motion that elevates the user experience.</p>
+                                    </div>
+                                </div>
+                                <div className="md:w-1/2">
+                                    <img src={Hero} alt="" />
+                                </div>
+                            </div>
+                            <div 
+                                ref={featureThreeRef}
+                                className={`flex flex-col-reverse md:flex-row items-center gap-4 transition-all duration-1000 ease-out ${isFeatureThreeVisible
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-12'
+                                }`}
+                            >
+                                <div className="md:w-1/2 text-3xl">
+                                    <div className="max-w-md mx-auto">
+                                        <h1 className="text-white font-semibold">Clean, beautiful code.</h1>
+                                        <p className="text-[#777777]">I write robust, maintainable code with a focus on performance and scalability.</p>
+                                    </div>
+                                </div>
+                                <div className="md:w-1/2">
+                                    <img src={Hero} alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <ScrollToTop />
+        </div>
+    )
+}
+
+export default Home
