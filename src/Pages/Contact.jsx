@@ -3,15 +3,18 @@ import ScrollToTop from "../Components/ScrollToTop"
 import Navigation from "../Components/Navigation"
 import Footer from "../Components/Footer"
 import { useState, useEffect, useRef } from "react"
+import toast, { Toaster } from 'react-hot-toast'; 
 
 const Contact = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isContactVisible, setIsContactVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
   const heroRef = useRef(null);
   const formRef = useRef(null);
   const contactRef = useRef(null);
+  const form = useRef(null); 
 
   useEffect(() => {
     const observerOptions = {
@@ -68,9 +71,69 @@ const Contact = () => {
     };
   }, []);
 
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(form.current);
+    const name = formData.get('name')?.trim();
+    const email = formData.get('email')?.trim();
+    const message = formData.get('message')?.trim();
+
+    if (!name || !email || !message) {
+      toast.error('Please fill in all fields to send your message.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error('Please enter a valid email address.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/contact`, {  
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success('Message sent successfully! I\'ll get back to you soon.');
+        form.current.reset(); 
+      } else {
+        toast.error(data.error || 'Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div>
       <Navigation />
+      <Toaster 
+        position="buttom-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#191919',
+            color: '#fff',
+            border: '1px solid #777777',
+            fontFamily: 'Outfit',
+            fontSize:'10px',
+          },
+        }}
+      />
       <div>
         <section>
           <div className="max-w-screen-xl mx-auto pt-20 px-4">
@@ -88,7 +151,7 @@ const Contact = () => {
         </section>
 
         <section>
-          <form className="max-w-screen-xl mx-auto py-8 px-4">
+          <form ref={form} onSubmit={sendEmail} className="max-w-screen-xl mx-auto py-8 px-4">
             <div
               ref={formRef}
               className={`max-w-screen-sm transition-all duration-1000 ease-out ${isFormVisible
@@ -99,26 +162,48 @@ const Contact = () => {
               <div className="mb-4">
                 <label>
                   <h4 className="mb-2 text-[#777777]">Name</h4>
-                  <input type="text" placeholder="Jane Smith" className="bg-[#191919] text-[#999999] p-2 w-full rounded text-base focus:outline-none" />
+                  <input 
+                    type="text" 
+                    name="name"
+                    placeholder="Jane Smith" 
+                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full text-base focus:outline-none" 
+                    required 
+                  />
                 </label>
               </div>
 
               <div className="mb-4">
                 <label>
                   <h4 className="mb-2 text-[#777777]">Email</h4>
-                  <input type="email" placeholder="Jane@example.com" className="bg-[#191919] text-[#999999] p-2 w-full rounded text-base focus:outline-none" />
+                  <input 
+                    type="email" 
+                    name="email"
+                    placeholder="Jane@example.com" 
+                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full text-base focus:outline-none" 
+                    required 
+                  />
                 </label>
               </div>
 
               <div className="mb-4">
                 <label>
                   <h4 className="mb-2 text-[#777777]">Message</h4>
-                  <textarea rows={4} placeholder="Your message..." className="bg-[#191919] text-[#999999] p-2 w-full rounded text-base focus:outline-none" />
+                  <textarea 
+                    name="message"
+                    rows={4} 
+                    placeholder="Your message..." 
+                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full  text-base focus:outline-none" 
+                    required 
+                  />
                 </label>
               </div>
 
-              <button className="bg-white/90 w-full md:w-fit font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300">
-                Submit
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="bg-white/90 w-full md:w-fit font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Sending...' : 'Submit'}
               </button>
             </div>
           </form>
@@ -133,9 +218,9 @@ const Contact = () => {
               }`}
           >
             <h1 className="text-white text-3xl">Contact Information</h1>
-            <p className="text-[#777777]"><Link to="mailto:tofunmithehuman@gmail.com" className="hover:text-white transition-colors duration-300">tofunmithehuman@gmail.com</Link></p>
-            <p className="text-[#777777]"><Link to="tel:+2349046346648" className="hover:text-white transition-colors duration-300">(+234) 9046346648</Link></p>
-            <p className="text-[#777777]"><Link to="tel:+2347046346648" className="hover:text-white transition-colors duration-300">(+234) 7046346648</Link></p>
+            <p className="text-[#777777]"><a href="mailto:tofunmithehuman@gmail.com" className="hover:text-white transition-colors duration-300">tofunmithehuman@gmail.com</a></p>
+            <p className="text-[#777777]"><a href="tel:+2349046346648" className="hover:text-white transition-colors duration-300">(+234) 9046346648</a></p>
+            <p className="text-[#777777]"><a href="tel:+2347046346648" className="hover:text-white transition-colors duration-300">(+234) 7046346648</a></p>
           </div>
         </section>
       </div>
