@@ -1,5 +1,6 @@
 import ScrollToTop from "../Components/ScrollToTop"
 import Navigation from "../Components/Navigation"
+import Footer from "../Components/Footer"
 import Hero from "../assets/hero.jpg"
 import MobileHero from "../assets/MobileHero.jpg"
 import { useState, useEffect, useRef } from "react"
@@ -262,6 +263,7 @@ const Home = () => {
                     </section>
                 </div>
             </div>
+            <Footer />
             <ScrollToTop />
         </div>
     )

@@ -16,7 +16,6 @@ const Navigation = () => {
           <nav className="hidden md:block">
             <ul className="text-[#777777] flex items-center gap-4 uppercase text-sm">
               <li><Link to='/'>Home</Link></li>
-              <li><Link to='/portfolio'>Portfolio</Link></li>
               <li><Link to='/projects'>Projects</Link></li>
               <li><Link to='/contact'>Contact</Link></li>
             </ul>
@@ -37,7 +36,6 @@ const Navigation = () => {
           </button>
           <ul className="flex flex-col gap-8 uppercase text-lg text-[#777777] text-center">
             <li><Link to='/' onClick={() => setIsOpen(false)}>Home</Link></li>
-            <li><Link to='/portfolio' onClick={() => setIsOpen(false)}>Portfolio</Link></li>
             <li><Link to='/projects' onClick={() => setIsOpen(false)}>Projects</Link></li>
             <li><Link to='/contact' onClick={() => setIsOpen(false)}>Contact</Link></li>
           </ul>
