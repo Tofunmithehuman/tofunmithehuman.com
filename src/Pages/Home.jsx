@@ -1,6 +1,7 @@
 import ScrollToTop from "../Components/ScrollToTop"
 import Navigation from "../Components/Navigation"
 import Hero from "../assets/hero.jpg"
+import MobileHero from "../assets/MobileHero.jpg"
 import { useState, useEffect, useRef } from "react"
 
 const Home = () => {
@@ -178,16 +179,21 @@ const Home = () => {
 
                             <div
                                 ref={imageRef}
-                                className={`mt-16 py-4 md:py-6 relative overflow-hidden rounded-md transition-all duration-1000 ease-out ${isImageVisible
+                                className={`mt-4 sm:mt-16 py-4 md:py-6 relative overflow-hidden rounded-md transition-all duration-1000 ease-out ${isImageVisible
                                     ? 'opacity-100 translate-y-0'
                                     : 'opacity-0 translate-y-16'
                                     }`}
                             >
-                                <div className="w-full overflow-hidden">
+                                <div className="w-full overflow-hidden rounded-md">
                                     <img
                                         src={Hero}
-                                        alt="Working Desk"
-                                        className="w-full h-auto filter grayscale block"
+                                        alt="Tofunmithehuman Desk"
+                                        className="w-full h-auto filter grayscale md:block hidden"
+                                        style={{ transform: `scale(${scale})` }}
+                                    /><img
+                                        src={MobileHero}
+                                        alt="Tofunmithehuman"
+                                        className="w-full h-auto filter grayscale block md:hidden"
                                         style={{ transform: `scale(${scale})` }}
                                     />
                                 </div>
@@ -199,7 +205,7 @@ const Home = () => {
                     <section>
                         <div
                             ref={sectionTwoRef}
-                            className={`py-10 text-center text-3xl max-w-4xl mx-auto font-semibold transition-all duration-1000 ease-out ${isSectionTwoVisible
+                            className={`py-10 px-4 text-center text-3xl max-w-4xl mx-auto font-semibold transition-all duration-1000 ease-out ${isSectionTwoVisible
                                 ? 'opacity-100 translate-y-0'
                                 : 'opacity-0 translate-y-12'
                                 }`}
@@ -221,12 +227,12 @@ const Home = () => {
                             >
                                 <div className="md:w-1/2 text-3xl">
                                     <div className="max-w-md mx-auto">
-                                        <h1 className="text-white font-semibold">Modern web apps.</h1>
+                                        <h1 className="text-white font-semibold mt-4">Modern web apps.</h1>
                                         <p className="text-[#777777]">From concept to launch, I craft blazing fast, responsive experiences using the latest web technologies.</p>
                                     </div>
                                 </div>
                                 <div className="md:w-1/2">
-                                    <img src={Hero} alt="" />
+                                    <img src={Hero} alt="Modern web app" className="filter grayscale rounded-md" />
                                 </div>
                             </div>
                             <div 
@@ -238,12 +244,12 @@ const Home = () => {
                             >
                                 <div className="md:w-1/2 text-3xl">
                                     <div className="max-w-md mx-auto">
-                                        <h1 className="text-white font-semibold">Smooth animations.</h1>
+                                        <h1 className="text-white font-semibold mt-4">Smooth animations.</h1>
                                         <p className="text-[#777777]">Every project feels alive with subtle, elegant motion that elevates the user experience.</p>
                                     </div>
                                 </div>
                                 <div className="md:w-1/2">
-                                    <img src={Hero} alt="" />
+                                    <img src={Hero} alt="Smooth animations" className="filter grayscale rounded-md" />
                                 </div>
                             </div>
                             <div 
@@ -255,12 +261,12 @@ const Home = () => {
                             >
                                 <div className="md:w-1/2 text-3xl">
                                     <div className="max-w-md mx-auto">
-                                        <h1 className="text-white font-semibold">Clean, beautiful code.</h1>
+                                        <h1 className="text-white font-semibold mt-4">Clean, beautiful code.</h1>
                                         <p className="text-[#777777]">I write robust, maintainable code with a focus on performance and scalability.</p>
                                     </div>
                                 </div>
                                 <div className="md:w-1/2">
-                                    <img src={Hero} alt="" />
+                                    <img src={Hero} alt="Clean, beautiful code" className="filter grayscale rounded-md" />
                                 </div>
                             </div>
                         </div>
