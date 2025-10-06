@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router'
 import Home from './Pages/Home'
 import Projects from './Pages/Projects'
 import Contact from './Pages/Contact'
+import Error from './Components/404'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/projects' element={<Projects />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='*' element={<Error />} />
       </Routes>
     </div>
   )

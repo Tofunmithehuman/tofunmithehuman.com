@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import ScrollToTop from "../Components/ScrollToTop"
 import Navigation from "../Components/Navigation"
 import Footer from "../Components/Footer"
@@ -272,9 +273,9 @@ const Home = () => {
                         >
                             <h1 className="text-white text-5xl">Let’s build something amazing together.</h1>
                             <div className="mt-4 md:mt-8">
-                                <button className="bg-white/90 w-full md:w-fit font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300">
+                                <Link to='/contact' className="bg-white/90 w-full md:w-fit font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300">
                                     Contact me
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </section>
