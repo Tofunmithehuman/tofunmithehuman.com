@@ -199,7 +199,7 @@ const Home = () => {
                                 : 'opacity-0 translate-y-12'
                                 }`}
                         >
-                            <h1 className="text-white">Hi, I’m Oluwatofunmi, or Tofunmithehuman.</h1>
+                            <h1 className="text-white">Hi, I’m Oluwatofunmi,</h1>
                             <h2 className="text-[#777777]">I build sleek, efficient, and scalable solutions with code. Passionate about beautiful UI, powerful backends, and seamless digital experience.</h2>
                         </div>
                     </section>
