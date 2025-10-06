@@ -10,18 +10,18 @@ const Home = () => {
     const [isHeadingVisible, setIsHeadingVisible] = useState(false);
     const [isImageVisible, setIsImageVisible] = useState(false);
     const [isSectionTwoVisible, setIsSectionTwoVisible] = useState(false);
-    const [isButtonVisible, setIsButtonVisible] = useState(false);
     const [isFeatureOneVisible, setIsFeatureOneVisible] = useState(false);
     const [isFeatureTwoVisible, setIsFeatureTwoVisible] = useState(false);
     const [isFeatureThreeVisible, setIsFeatureThreeVisible] = useState(false);
+    const [isCtaVisible, setIsCtaVisible] = useState(false);
 
     const headingRef = useRef(null);
     const imageRef = useRef(null);
     const sectionTwoRef = useRef(null);
-    const buttonRef = useRef(null);
     const featureOneRef = useRef(null);
     const featureTwoRef = useRef(null);
     const featureThreeRef = useRef(null);
+    const ctaRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -64,14 +64,6 @@ const Home = () => {
             });
         }, observerOptions);
 
-        const buttonObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setIsButtonVisible(true);
-                }
-            });
-        }, observerOptions);
-
         const featureOneObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -96,6 +88,14 @@ const Home = () => {
             });
         }, observerOptions);
 
+        const ctaObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsCtaVisible(true);
+                }
+            });
+        }, observerOptions);
+
         if (headingRef.current) {
             headingObserver.observe(headingRef.current);
         }
@@ -106,10 +106,6 @@ const Home = () => {
 
         if (sectionTwoRef.current) {
             sectionTwoObserver.observe(sectionTwoRef.current);
-        }
-
-        if (buttonRef.current) {
-            buttonObserver.observe(buttonRef.current);
         }
 
         if (featureOneRef.current) {
@@ -124,6 +120,10 @@ const Home = () => {
             featureThreeObserver.observe(featureThreeRef.current);
         }
 
+        if (ctaRef.current) {
+            ctaObserver.observe(ctaRef.current);
+        }
+
         return () => {
             if (headingRef.current) {
                 headingObserver.unobserve(headingRef.current);
@@ -134,9 +134,6 @@ const Home = () => {
             if (sectionTwoRef.current) {
                 sectionTwoObserver.unobserve(sectionTwoRef.current);
             }
-            if (buttonRef.current) {
-                buttonObserver.unobserve(buttonRef.current);
-            }
             if (featureOneRef.current) {
                 featureOneObserver.unobserve(featureOneRef.current);
             }
@@ -145,6 +142,9 @@ const Home = () => {
             }
             if (featureThreeRef.current) {
                 featureThreeObserver.unobserve(featureThreeRef.current);
+            }
+            if (ctaRef.current) {
+                ctaObserver.unobserve(ctaRef.current);
             }
         };
     }, []);
@@ -208,12 +208,12 @@ const Home = () => {
 
                     <section>
                         <div className="py-20 px-4 max-w-screen-xl mx-auto flex flex-col gap-12 sm:gap-4">
-                            <div 
+                            <div
                                 ref={featureOneRef}
                                 className={`flex flex-col-reverse md:flex-row items-center gap-4 transition-all duration-1000 ease-out ${isFeatureOneVisible
                                     ? 'opacity-100 translate-y-0'
                                     : 'opacity-0 translate-y-12'
-                                }`}
+                                    }`}
                             >
                                 <div className="md:w-1/2 text-3xl">
                                     <div className="md:max-w-md mx-auto">
@@ -225,12 +225,12 @@ const Home = () => {
                                     <img src={Hero} alt="Modern web app" className="filter grayscale rounded-md" />
                                 </div>
                             </div>
-                            <div 
+                            <div
                                 ref={featureTwoRef}
                                 className={`flex flex-col-reverse md:flex-row-reverse items-center gap-4 transition-all duration-1000 ease-out ${isFeatureTwoVisible
                                     ? 'opacity-100 translate-y-0'
                                     : 'opacity-0 translate-y-12'
-                                }`}
+                                    }`}
                             >
                                 <div className="md:w-1/2 text-3xl">
                                     <div className="md:max-w-md mx-auto">
@@ -242,12 +242,12 @@ const Home = () => {
                                     <img src={Hero} alt="Smooth animations" className="filter grayscale rounded-md" />
                                 </div>
                             </div>
-                            <div 
+                            <div
                                 ref={featureThreeRef}
                                 className={`flex flex-col-reverse md:flex-row items-center gap-4 transition-all duration-1000 ease-out ${isFeatureThreeVisible
                                     ? 'opacity-100 translate-y-0'
                                     : 'opacity-0 translate-y-12'
-                                }`}
+                                    }`}
                             >
                                 <div className="md:w-1/2 text-3xl">
                                     <div className="md:max-w-md mx-auto">
@@ -258,6 +258,23 @@ const Home = () => {
                                 <div className="md:w-1/2">
                                     <img src={Hero} alt="Clean, beautiful code" className="filter grayscale rounded-md" />
                                 </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div
+                            ref={ctaRef}
+                            className={`py-28 px-4 max-w-screen-xl mx-auto md:text-center transition-all duration-1000 ease-out ${isCtaVisible
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-12'
+                                }`}
+                        >
+                            <h1 className="text-white text-5xl">Let’s build something amazing together.</h1>
+                            <div className="mt-4 md:mt-8">
+                                <button className="bg-white/90 w-full md:w-fit font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300">
+                                    Contact me
+                                </button>
                             </div>
                         </div>
                     </section>
