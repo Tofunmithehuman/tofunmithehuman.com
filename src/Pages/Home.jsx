@@ -206,7 +206,7 @@ const Home = () => {
 
 
                     <section>
-                        <div className="py-20 px-4 max-w-screen-xl mx-auto flex flex-col gap-16">
+                        <div className="py-20 px-4 max-w-screen-xl mx-auto flex flex-col gap-12 sm:gap-4">
                             <div 
                                 ref={featureOneRef}
                                 className={`flex flex-col-reverse md:flex-row items-center gap-4 transition-all duration-1000 ease-out ${isFeatureOneVisible
@@ -215,7 +215,7 @@ const Home = () => {
                                 }`}
                             >
                                 <div className="md:w-1/2 text-3xl">
-                                    <div className="max-w-md mx-auto">
+                                    <div className="md:max-w-md mx-auto">
                                         <h1 className="text-white font-semibold mt-4">Modern web apps.</h1>
                                         <p className="text-[#777777]">From concept to launch, I craft blazing fast, responsive experiences using the latest web technologies.</p>
                                     </div>
@@ -232,7 +232,7 @@ const Home = () => {
                                 }`}
                             >
                                 <div className="md:w-1/2 text-3xl">
-                                    <div className="max-w-md mx-auto">
+                                    <div className="md:max-w-md mx-auto">
                                         <h1 className="text-white font-semibold mt-4">Smooth animations.</h1>
                                         <p className="text-[#777777]">Every project feels alive with subtle, elegant motion that elevates the user experience.</p>
                                     </div>
@@ -249,7 +249,7 @@ const Home = () => {
                                 }`}
                             >
                                 <div className="md:w-1/2 text-3xl">
-                                    <div className="max-w-md mx-auto">
+                                    <div className="md:max-w-md mx-auto">
                                         <h1 className="text-white font-semibold mt-4">Clean, beautiful code.</h1>
                                         <p className="text-[#777777]">I write robust, maintainable code with a focus on performance and scalability.</p>
                                     </div>
