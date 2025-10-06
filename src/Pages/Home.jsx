@@ -271,7 +271,7 @@ const Home = () => {
                                 : 'opacity-0 translate-y-12'
                                 }`}
                         >
-                            <h1 className="text-white text-5xl">Let’s build something amazing together.</h1>
+                            <h1 className="text-white text-4xl sm:text-5xl">Let’s build something amazing together.</h1>
                             <div className="mt-4 md:mt-8">
                                 <Link to='/contact' className="bg-white/90 w-full md:w-fit font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300">
                                     Contact me
