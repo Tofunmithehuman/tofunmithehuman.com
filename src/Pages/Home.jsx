@@ -165,17 +165,6 @@ const Home = () => {
                                 <h1 className="text-white">Animated. Modern. Black.</h1>
                                 <h2 className="text-[#777777]">Software Developer Portfolio.</h2>
                             </div>
-                            <div
-                                ref={buttonRef}
-                                className={`flex items-center mt-4 transition-all duration-1000 ease-out ${isButtonVisible
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-12'
-                                    }`}
-                            >
-                                <button className="text-black bg-white px-8 py-2 rounded text-sm w-full md:w-fit font-medium hover:bg-white/90 duration-300">
-                                    Explore
-                                </button>
-                            </div>
 
                             <div
                                 ref={imageRef}
