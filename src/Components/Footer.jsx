@@ -89,9 +89,9 @@ const Footer = () => {
               >
                 <h1 className="text-white mb-2">Explore</h1>
                 <ul className="text-[#777777] flex flex-col gap-2">
-                  <li><Link to='/'>Home</Link></li>
-                  <li><Link to='/projects'>Projects</Link></li>
-                  <li><Link to='/contact'>Contact</Link></li>
+                  <li><Link to='/' className="hover:text-white transition-colors duration-300">Home</Link></li>
+                  <li><Link to='/projects' className="hover:text-white transition-colors duration-300">Projects</Link></li>
+                  <li><Link to='/contact' className="hover:text-white transition-colors duration-300">Contact</Link></li>
                 </ul>
               </div>
                <div
@@ -103,9 +103,9 @@ const Footer = () => {
               >
                 <h1 className="text-white mb-2">Connect</h1>
                 <ul className="text-[#777777] flex flex-col gap-2">
-                  <li><Link to='https://github.com/Tofunmithehuman' target="_blank">GitHub</Link></li>
-                  <li><Link to='https://www.instagram.com/tofunmithehuman' target="_blank">Instagram</Link></li>
-                  <li><Link to='http://wa.me/2349046346648' target="_blank">Whatsapp</Link></li>
+                  <li><Link to='https://github.com/Tofunmithehuman' target="_blank" className="hover:text-white transition-colors duration-300">GitHub</Link></li>
+                  <li><Link to='https://www.instagram.com/tofunmithehuman' target="_blank" className="hover:text-white transition-colors duration-300">Instagram</Link></li>
+                  <li><Link to='http://wa.me/2349046346648' target="_blank" className="hover:text-white transition-colors duration-300">Whatsapp</Link></li>
                 </ul>
               </div>
             </div>

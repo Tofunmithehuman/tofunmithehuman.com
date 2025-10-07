@@ -4,6 +4,9 @@ import Navigation from "../Components/Navigation"
 import Footer from "../Components/Footer"
 import Hero from "../assets/hero.jpg"
 import MobileHero from "../assets/MobileHero.jpg"
+import WebApp from "../assets/webApp.jpg"
+import Animation from "../assets/animation.jpg"
+import Code from "../assets/code.jpg"
 import { useState, useEffect, useRef } from "react"
 
 const Home = () => {
@@ -223,7 +226,7 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div className="md:w-1/2">
-                                    <img src={Hero} alt="Modern web app" className="filter grayscale rounded-md" />
+                                    <img src={WebApp} alt="Modern web app" className="filter grayscale rounded-md" />
                                 </div>
                             </div>
                             <div
@@ -240,7 +243,7 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div className="md:w-1/2">
-                                    <img src={Hero} alt="Smooth animations" className="filter grayscale rounded-md" />
+                                    <img src={Animation} alt="Smooth animations" className="filter grayscale rounded-md" />
                                 </div>
                             </div>
                             <div
@@ -257,7 +260,7 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div className="md:w-1/2">
-                                    <img src={Hero} alt="Clean, beautiful code" className="filter grayscale rounded-md" />
+                                    <img src={Code} alt="Clean, beautiful code" className="filter grayscale rounded-md" />
                                 </div>
                             </div>
                         </div>
