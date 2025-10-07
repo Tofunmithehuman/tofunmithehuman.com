@@ -3,18 +3,18 @@ import ScrollToTop from "../Components/ScrollToTop"
 import Navigation from "../Components/Navigation"
 import Footer from "../Components/Footer"
 import { useState, useEffect, useRef } from "react"
-import toast, { Toaster } from 'react-hot-toast'; 
+import toast, { Toaster } from 'react-hot-toast';
 
 const Contact = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isContactVisible, setIsContactVisible] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const heroRef = useRef(null);
   const formRef = useRef(null);
   const contactRef = useRef(null);
-  const form = useRef(null); 
+  const form = useRef(null);
 
   useEffect(() => {
     const observerOptions = {
@@ -94,7 +94,7 @@ const Contact = () => {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/contact`, {  
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ const Contact = () => {
 
       if (response.ok) {
         toast.success('Message sent successfully! I\'ll get back to you soon.');
-        form.current.reset(); 
+        form.current.reset();
       } else {
         toast.error(data.error || 'Failed to send message. Please try again.');
       }
@@ -121,16 +121,16 @@ const Contact = () => {
   return (
     <div>
       <Navigation />
-      <Toaster 
-        position="buttom-right"
+      <Toaster
+        position="top-right"
         toastOptions={{
           duration: 4000,
           style: {
-            background: '#191919',
+            background: '#000000',
             color: '#fff',
-            border: '1px solid #777777',
+            border: '2px solid #777777',
             fontFamily: 'Outfit',
-            fontSize:'10px',
+            fontSize: '10px',
           },
         }}
       />
@@ -162,12 +162,12 @@ const Contact = () => {
               <div className="mb-4">
                 <label>
                   <h4 className="mb-2 text-[#777777]">Name</h4>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     name="name"
-                    placeholder="Jane Smith" 
-                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full text-base focus:outline-none" 
-                    required 
+                    placeholder="Jane Smith"
+                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full text-base focus:outline-none"
+                    required
                   />
                 </label>
               </div>
@@ -175,12 +175,12 @@ const Contact = () => {
               <div className="mb-4">
                 <label>
                   <h4 className="mb-2 text-[#777777]">Email</h4>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     name="email"
-                    placeholder="Jane@example.com" 
-                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full text-base focus:outline-none" 
-                    required 
+                    placeholder="Jane@example.com"
+                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full text-base focus:outline-none"
+                    required
                   />
                 </label>
               </div>
@@ -188,22 +188,28 @@ const Contact = () => {
               <div className="mb-4">
                 <label>
                   <h4 className="mb-2 text-[#777777]">Message</h4>
-                  <textarea 
+                  <textarea
                     name="message"
-                    rows={4} 
-                    placeholder="Your message..." 
-                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full  text-base focus:outline-none" 
-                    required 
+                    rows={4}
+                    placeholder="Your message..."
+                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full  text-base focus:outline-none"
+                    required
                   />
                 </label>
               </div>
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isSubmitting}
-                className="bg-white/90 w-full md:w-fit font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-white/90 w-full md:w-26 h-9 font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                {isSubmitting ? 'Sending...' : 'Submit'}
+                {isSubmitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+                  </>
+                ) : (
+                  'Submit'
+                )}
               </button>
             </div>
           </form>
