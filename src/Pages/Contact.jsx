@@ -192,7 +192,7 @@ const Contact = () => {
                     name="message"
                     rows={4}
                     placeholder="Your message..."
-                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full  text-base focus:outline-none"
+                    className="bg-[#191919] text-[#999999] py-2 px-4 w-full text-base focus:outline-none resize-none"
                     required
                   />
                 </label>

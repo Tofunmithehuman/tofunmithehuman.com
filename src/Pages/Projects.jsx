@@ -7,7 +7,9 @@ const Projects = () => {
     <div>
       <Navigation />
       <div>
-        <section></section>
+        <section>
+          
+        </section>
       </div>
       <Footer />
       <ScrollToTop />
