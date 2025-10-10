@@ -14,6 +14,16 @@ import Heala from "../assets/heala.png"
 const Projects = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
   const [isProjectsVisible, setIsProjectsVisible] = useState(false);
+  
+  // Image loading states
+  const [loadedImages, setLoadedImages] = useState({
+    0: false,
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false
+  });
 
   const headerRef = useRef(null);
   const projectsRef = useRef(null);
@@ -26,6 +36,13 @@ const Projects = () => {
     { img: AmaLagos, alt: "Ama Lagos", name: "AMA Lagos", url: "https://amalagos.ng/" },
     { img: Heala, alt: "Heala", name: "Heala", url: "https://heala.ng/" }
   ];
+
+  const handleImageLoad = (index) => {
+    setLoadedImages(prev => ({
+      ...prev,
+      [index]: true
+    }));
+  };
 
   useEffect(() => {
     const observerOptions = {
@@ -75,10 +92,9 @@ const Projects = () => {
           <div className="max-w-screen-xl mx-auto py-20 px-4">
             <div
               ref={headerRef}
-              className={`transition-all duration-1000 ease-out ${isHeaderVisible
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-12'
-                }`}
+              className={`transition-all duration-1000 ease-out ${
+                isHeaderVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
             >
               <h1 className="text-white text-4xl mb-12">Modern, sleek showcases.</h1>
             </div>
@@ -91,15 +107,25 @@ const Projects = () => {
                 <div
                   key={index}
                   className={`transition-all duration-1000 ease-out ${
-                    isProjectsVisible
-                      ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 translate-y-12'
+                    isProjectsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                   }`}
                   style={{
                     transitionDelay: isProjectsVisible ? `${index * 150}ms` : '0ms'
                   }}
                 >
-                  <img src={project.img} alt={project.alt} className="mb-4 rounded" />
+                  <div className="relative">
+                    {/* Skeleton Loader */}
+                    {!loadedImages[index] && (
+                      <div className="w-full h-[250px] sm:h-[300px] md:h-[350px] bg-gray-800 animate-pulse rounded mb-4"></div>
+                    )}
+                    {/* Project Image */}
+                    <img 
+                      src={project.img} 
+                      alt={project.alt} 
+                      className={`mb-4 rounded w-full ${!loadedImages[index] ? 'invisible absolute' : ''}`}
+                      onLoad={() => handleImageLoad(index)}
+                    />
+                  </div>
                   <Link
                     to={project.url}
                     target="_blank"
