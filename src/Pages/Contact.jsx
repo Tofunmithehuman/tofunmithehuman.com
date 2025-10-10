@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom"
+import { useState, useEffect, useRef } from "react"
+import toast, { Toaster } from 'react-hot-toast';
+import { ArrowUpRight } from 'lucide-react';
 import ScrollToTop from "../Components/ScrollToTop"
 import Navigation from "../Components/Navigation"
 import Footer from "../Components/Footer"
-import { useState, useEffect, useRef } from "react"
-import toast, { Toaster } from 'react-hot-toast';
+
 
 const Contact = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
@@ -204,31 +205,18 @@ const Contact = () => {
                 className="bg-white/90 w-full md:w-26 h-9 font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
-                  </>
+                  <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
                 ) : (
-                  'Submit'
-                )}
+                  <span className="flex items-center gap-1">
+                    Submit <ArrowUpRight size={16} />
+                  </span>
+                )
+                }
               </button>
             </div>
           </form>
         </section>
 
-        <section>
-          <div
-            ref={contactRef}
-            className={`max-w-screen-xl mx-auto py-8 px-4 md:text-right transition-all duration-1000 ease-out ${isContactVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-12'
-              }`}
-          >
-            <h1 className="text-white text-3xl">Contact Information</h1>
-            <p className="text-[#777777]"><a href="mailto:tofunmithehuman@gmail.com" className="hover:text-white transition-colors duration-300">tofunmithehuman@gmail.com</a></p>
-            <p className="text-[#777777]"><a href="tel:+2349046346648" className="hover:text-white transition-colors duration-300">(+234) 9046346648</a></p>
-            <p className="text-[#777777]"><a href="tel:+2347046346648" className="hover:text-white transition-colors duration-300">(+234) 7046346648</a></p>
-          </div>
-        </section>
       </div>
       <Footer />
       <ScrollToTop />

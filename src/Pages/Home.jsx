@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom"
+import { useState, useEffect, useRef } from "react"
+import { ArrowUpRight } from 'lucide-react';
 import ScrollToTop from "../Components/ScrollToTop"
 import Navigation from "../Components/Navigation"
 import Footer from "../Components/Footer"
@@ -6,25 +8,21 @@ import Hero from "../assets/hero.jpg"
 import MobileHero from "../assets/MobileHero.jpg"
 import WebApp from "../assets/webApp.jpg"
 import Animation from "../assets/animation.jpg"
-import Code from "../assets/code.jpg"
-import { useState, useEffect, useRef } from "react"
+
+
 
 const Home = () => {
     const [scale, setScale] = useState(1);
     const [isHeadingVisible, setIsHeadingVisible] = useState(false);
     const [isImageVisible, setIsImageVisible] = useState(false);
     const [isSectionTwoVisible, setIsSectionTwoVisible] = useState(false);
-    const [isFeatureOneVisible, setIsFeatureOneVisible] = useState(false);
-    const [isFeatureTwoVisible, setIsFeatureTwoVisible] = useState(false);
-    const [isFeatureThreeVisible, setIsFeatureThreeVisible] = useState(false);
+    const [isSectionThreeVisible, setIsSectionThreeVisible] = useState(false);
     const [isCtaVisible, setIsCtaVisible] = useState(false);
 
     const headingRef = useRef(null);
     const imageRef = useRef(null);
     const sectionTwoRef = useRef(null);
-    const featureOneRef = useRef(null);
-    const featureTwoRef = useRef(null);
-    const featureThreeRef = useRef(null);
+    const sectionThreeRef = useRef(null);
     const ctaRef = useRef(null);
 
     useEffect(() => {
@@ -68,26 +66,10 @@ const Home = () => {
             });
         }, observerOptions);
 
-        const featureOneObserver = new IntersectionObserver((entries) => {
+        const sectionThreeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    setIsFeatureOneVisible(true);
-                }
-            });
-        }, observerOptions);
-
-        const featureTwoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setIsFeatureTwoVisible(true);
-                }
-            });
-        }, observerOptions);
-
-        const featureThreeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setIsFeatureThreeVisible(true);
+                    setIsSectionThreeVisible(true);
                 }
             });
         }, observerOptions);
@@ -112,16 +94,8 @@ const Home = () => {
             sectionTwoObserver.observe(sectionTwoRef.current);
         }
 
-        if (featureOneRef.current) {
-            featureOneObserver.observe(featureOneRef.current);
-        }
-
-        if (featureTwoRef.current) {
-            featureTwoObserver.observe(featureTwoRef.current);
-        }
-
-        if (featureThreeRef.current) {
-            featureThreeObserver.observe(featureThreeRef.current);
+        if (sectionThreeRef.current) {
+            sectionThreeObserver.observe(sectionThreeRef.current);
         }
 
         if (ctaRef.current) {
@@ -138,14 +112,8 @@ const Home = () => {
             if (sectionTwoRef.current) {
                 sectionTwoObserver.unobserve(sectionTwoRef.current);
             }
-            if (featureOneRef.current) {
-                featureOneObserver.unobserve(featureOneRef.current);
-            }
-            if (featureTwoRef.current) {
-                featureTwoObserver.unobserve(featureTwoRef.current);
-            }
-            if (featureThreeRef.current) {
-                featureThreeObserver.unobserve(featureThreeRef.current);
+            if (sectionThreeRef.current) {
+                sectionThreeObserver.unobserve(sectionThreeRef.current);
             }
             if (ctaRef.current) {
                 ctaObserver.unobserve(ctaRef.current);
@@ -211,56 +179,41 @@ const Home = () => {
 
 
                     <section>
-                        <div className="py-20 px-4 max-w-screen-xl mx-auto flex flex-col gap-12 sm:gap-4">
+                        <div className="py-20 px-4 max-w-screen-xl mx-auto">
                             <div
-                                ref={featureOneRef}
-                                className={`flex flex-col-reverse md:flex-row items-center gap-4 transition-all duration-1000 ease-out ${isFeatureOneVisible
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-12'
-                                    }`}
+                                ref={sectionThreeRef}
+                                className="grid grid-cols-1 md:grid-cols-2 gap-8"
                             >
-                                <div className="md:w-1/2 text-3xl">
-                                    <div className="md:max-w-md mx-auto">
-                                        <h1 className="text-white font-semibold mt-4">Modern web apps.</h1>
-                                        <p className="text-[#777777]">From concept to launch, I craft blazing fast, responsive experiences using the latest web technologies.</p>
+                                <div
+                                    className={`transition-all duration-1000 ease-out ${isSectionThreeVisible
+                                            ? 'opacity-100 translate-y-0'
+                                            : 'opacity-0 translate-y-12'
+                                        }`}
+                                    style={{
+                                        transitionDelay: isSectionThreeVisible ? '0ms' : '0ms'
+                                    }}
+                                >
+                                    <img src={WebApp} alt="Modern web app" className="rounded-md mb-4" />
+                                    <div className="text-3xl">
+                                        <h1 className="text-white font-semibold">Modern web apps.</h1>
+                                        <p className="text-[#777777] text-lg">From concept to launch, I craft blazing fast, responsive experiences using the latest web technologies.</p>
                                     </div>
                                 </div>
-                                <div className="md:w-1/2">
-                                    <img src={WebApp} alt="Modern web app" className="filter grayscale rounded-md" />
-                                </div>
-                            </div>
-                            <div
-                                ref={featureTwoRef}
-                                className={`flex flex-col-reverse md:flex-row-reverse items-center gap-4 transition-all duration-1000 ease-out ${isFeatureTwoVisible
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-12'
-                                    }`}
-                            >
-                                <div className="md:w-1/2 text-3xl">
-                                    <div className="md:max-w-md mx-auto">
-                                        <h1 className="text-white font-semibold mt-4">Smooth animations.</h1>
-                                        <p className="text-[#777777]">Every project feels alive with subtle, elegant motion that elevates the user experience.</p>
+
+                                <div
+                                    className={`transition-all duration-1000 ease-out ${isSectionThreeVisible
+                                            ? 'opacity-100 translate-y-0'
+                                            : 'opacity-0 translate-y-12'
+                                        }`}
+                                    style={{
+                                        transitionDelay: isSectionThreeVisible ? '150ms' : '0ms'
+                                    }}
+                                >
+                                    <img src={Animation} alt="Smooth animations" className="rounded-md mb-4" />
+                                    <div className="text-3xl">
+                                        <h1 className="text-white font-semibold">Smooth animations.</h1>
+                                        <p className="text-[#777777] text-lg">Every project feels alive with subtle, elegant motion that elevates the user experience.</p>
                                     </div>
-                                </div>
-                                <div className="md:w-1/2">
-                                    <img src={Animation} alt="Smooth animations" className="filter grayscale rounded-md" />
-                                </div>
-                            </div>
-                            <div
-                                ref={featureThreeRef}
-                                className={`flex flex-col-reverse md:flex-row items-center gap-4 transition-all duration-1000 ease-out ${isFeatureThreeVisible
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-12'
-                                    }`}
-                            >
-                                <div className="md:w-1/2 text-3xl">
-                                    <div className="md:max-w-md mx-auto">
-                                        <h1 className="text-white font-semibold mt-4">Clean, beautiful code.</h1>
-                                        <p className="text-[#777777]">I write robust, maintainable code with a focus on performance and scalability.</p>
-                                    </div>
-                                </div>
-                                <div className="md:w-1/2">
-                                    <img src={Code} alt="Clean, beautiful code" className="filter grayscale rounded-md" />
                                 </div>
                             </div>
                         </div>
@@ -276,8 +229,8 @@ const Home = () => {
                         >
                             <h1 className="text-white text-4xl sm:text-5xl">Let’s build something amazing together.</h1>
                             <div className="mt-4 md:mt-8">
-                                <Link to='/contact' className="bg-white/90 w-full md:w-fit font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300">
-                                    Contact me
+                                <Link to='https://drive.google.com/file/d/1Tbb8oZofetTfJXWojyalNbfpQ3HLve2g/view?usp=sharing' target="_blank" className="flex justify-center mx-auto items-center gap-1 bg-white/90 w-full md:w-fit font-semibold text-black py-2 px-4 text-sm rounded uppercase cursor-pointer hover:bg-white duration-300">
+                                    View Resume <ArrowUpRight className="text-black" />
                                 </Link>
                             </div>
                         </div>

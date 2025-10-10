@@ -1,22 +1,31 @@
 import { Link } from "react-router-dom"
+import { useState, useEffect, useRef } from "react"
+import { ArrowUpRight } from 'lucide-react';
 import ScrollToTop from "../Components/ScrollToTop"
 import Navigation from "../Components/Navigation"
 import Footer from "../Components/Footer"
-import { useState, useEffect, useRef } from "react"
-import WebApp from "../assets/webApp.jpg"
-import Animation from "../assets/animation.jpg"
-import Code from "../assets/code.jpg"
+import Edenoceans from "../assets/edenoceans.png"
+import LuraVpn from "../assets/luravpn.png"
+import DaveMol from "../assets/davemol.png"
+import Pinscore from "../assets/pinscore.png"
+import AmaLagos from "../assets/amalagos.png"
+import Heala from "../assets/heala.png"
 
 const Projects = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
-  const [isFeatureOneVisible, setIsFeatureOneVisible] = useState(false);
-  const [isFeatureTwoVisible, setIsFeatureTwoVisible] = useState(false);
-  const [isFeatureThreeVisible, setIsFeatureThreeVisible] = useState(false);
+  const [isProjectsVisible, setIsProjectsVisible] = useState(false);
 
   const headerRef = useRef(null);
-  const featureOneRef = useRef(null);
-  const featureTwoRef = useRef(null);
-  const featureThreeRef = useRef(null);
+  const projectsRef = useRef(null);
+
+  const projects = [
+    { img: Edenoceans, alt: "Edenoceans", name: "Edenoceans", url: "https://www.edenoceans.com/" },
+    { img: LuraVpn, alt: "Lura VPN", name: "Lura VPN", url: "https://luravpn.com/" },
+    { img: DaveMol, alt: "Dave Mol", name: "Dave Mol", url: "https://dave-mol.vercel.app/" },
+    { img: Pinscore, alt: "Pinscore", name: "Pinscore", url: "https://www.pinscore.xyz/" },
+    { img: AmaLagos, alt: "Ama Lagos", name: "AMA Lagos", url: "https://amalagos.ng/" },
+    { img: Heala, alt: "Heala", name: "Heala", url: "https://heala.ng/" }
+  ];
 
   useEffect(() => {
     const observerOptions = {
@@ -32,26 +41,10 @@ const Projects = () => {
       });
     }, observerOptions);
 
-    const featureOneObserver = new IntersectionObserver((entries) => {
+    const projectsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setIsFeatureOneVisible(true);
-        }
-      });
-    }, observerOptions);
-
-    const featureTwoObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setIsFeatureTwoVisible(true);
-        }
-      });
-    }, observerOptions);
-
-    const featureThreeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setIsFeatureThreeVisible(true);
+          setIsProjectsVisible(true);
         }
       });
     }, observerOptions);
@@ -60,30 +53,16 @@ const Projects = () => {
       headerObserver.observe(headerRef.current);
     }
 
-    if (featureOneRef.current) {
-      featureOneObserver.observe(featureOneRef.current);
-    }
-
-    if (featureTwoRef.current) {
-      featureTwoObserver.observe(featureTwoRef.current);
-    }
-
-    if (featureThreeRef.current) {
-      featureThreeObserver.observe(featureThreeRef.current);
+    if (projectsRef.current) {
+      projectsObserver.observe(projectsRef.current);
     }
 
     return () => {
       if (headerRef.current) {
         headerObserver.unobserve(headerRef.current);
       }
-      if (featureOneRef.current) {
-        featureOneObserver.unobserve(featureOneRef.current);
-      }
-      if (featureTwoRef.current) {
-        featureTwoObserver.unobserve(featureTwoRef.current);
-      }
-      if (featureThreeRef.current) {
-        featureThreeObserver.unobserve(featureThreeRef.current);
+      if (projectsRef.current) {
+        projectsObserver.unobserve(projectsRef.current);
       }
     };
   }, []);
@@ -99,63 +78,37 @@ const Projects = () => {
               className={`transition-all duration-1000 ease-out ${isHeaderVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-12'
-              }`}
+                }`}
             >
               <h1 className="text-white text-4xl mb-12">Modern, sleek showcases.</h1>
             </div>
 
-            <div className="flex flex-col gap-12 sm:gap-4">
-              <div
-                ref={featureOneRef}
-                className={`flex flex-col-reverse md:flex-row items-center gap-4 transition-all duration-1000 ease-out ${isFeatureOneVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-12'
+            <div
+              ref={projectsRef}
+              className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-8"
+            >
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className={`transition-all duration-1000 ease-out ${
+                    isProjectsVisible
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 translate-y-12'
                   }`}
-              >
-                <div className="md:w-1/2 text-3xl">
-                  <div className="md:max-w-md mx-auto">
-                    <Link to='https://www.edenoceans.com/' target="_blank" className="text-white mt-4">Edenoceans</Link>
-                    <p className="text-[#777777]">From concept to launch, I craft blazing fast, responsive experiences using the latest web technologies.</p>
-                  </div>
+                  style={{
+                    transitionDelay: isProjectsVisible ? `${index * 150}ms` : '0ms'
+                  }}
+                >
+                  <img src={project.img} alt={project.alt} className="mb-4 rounded" />
+                  <Link
+                    to={project.url}
+                    target="_blank"
+                    className="text-white text-lg border-b inline-flex items-center justify-start gap-2"
+                  >
+                    {project.name} <ArrowUpRight />
+                  </Link>
                 </div>
-                <div className="md:w-1/2">
-                  <img src={WebApp} alt="Project One" className="rounded-md" />
-                </div>
-              </div>
-              <div
-                ref={featureTwoRef}
-                className={`flex flex-col-reverse md:flex-row-reverse items-center gap-4 transition-all duration-1000 ease-out ${isFeatureTwoVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-12'
-                  }`}
-              >
-                <div className="md:w-1/2 text-3xl">
-                  <div className="md:max-w-md mx-auto">
-                    <Link to='https://dave-mol.vercel.app/' target="_blank" className="text-white mt-4">Dave Mol</Link>
-                    <p className="text-[#777777]">Every project feels alive with subtle, elegant motion that elevates the user experience.</p>
-                  </div>
-                </div>
-                <div className="md:w-1/2">
-                  <img src={Animation} alt="Project Two" className="rounded-md" />
-                </div>
-              </div>
-              <div
-                ref={featureThreeRef}
-                className={`flex flex-col-reverse md:flex-row items-center gap-4 transition-all duration-1000 ease-out ${isFeatureThreeVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-12'
-                  }`}
-              >
-                <div className="md:w-1/2 text-3xl">
-                  <div className="md:max-w-md mx-auto">
-                     <Link to='https://luravpn.com/' target="_blank" className="text-white mt-4">Lura VPN</Link>
-                    <p className="text-[#777777]">I write robust, maintainable code with a focus on performance and scalability.</p>
-                  </div>
-                </div>
-                <div className="md:w-1/2">
-                  <img src={Code} alt="Project Three" className="rounded-md" />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
