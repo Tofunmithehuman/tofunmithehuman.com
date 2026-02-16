@@ -4,7 +4,8 @@ import { ArrowUpRight } from 'lucide-react';
 import ScrollToTop from "../Components/ScrollToTop"
 import Navigation from "../Components/Navigation"
 import Footer from "../Components/Footer"
-import Edenoceans from "../assets/edenoceans.png"
+// import Edenoceans from "../assets/edenoceans.png"
+import Genzmummy from "../assets/genzmummy.png"
 import LuraVpn from "../assets/luravpn.png"
 import DaveMol from "../assets/davemol.png"
 import Pinscore from "../assets/pinscore.png"
@@ -29,7 +30,9 @@ const Projects = () => {
   const projectsRef = useRef(null);
 
   const projects = [
-    { img: Edenoceans, alt: "Edenoceans", name: "Edenoceans", url: "https://www.edenoceans.com/" },
+    // { img: Edenoceans, alt: "Edenoceans", name: "Edenoceans", url: "https://www.edenoceans.com/" },
+
+    { img: Genzmummy, alt: "Genzmummy", name: "Genzmummy Store", url: "https://www.genzmummystore.com/" },
     { img: LuraVpn, alt: "Lura VPN", name: "Lura VPN", url: "https://luravpn.com/" },
     { img: DaveMol, alt: "Dave Mol", name: "Dave Mol", url: "https://dave-mol.vercel.app/" },
     { img: Pinscore, alt: "Pinscore", name: "Pinscore", url: "https://www.pinscore.xyz/" },
